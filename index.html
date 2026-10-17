@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<title>Caffeina</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Diario giornaliero del consumo di caffeina: target, progressi e statistiche.">
+<meta name="theme-color" content="#F3F1EC" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#15110E" media="(prefers-color-scheme: dark)">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Caffeina">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<!-- BODY-START -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <symbol id="i-pill" viewBox="0 0 24 24"><g transform="rotate(-45 12 12)"><rect x="3" y="8.5" width="18" height="7" rx="3.5"/><line x1="12" y1="8.5" x2="12" y2="15.5"/></g></symbol>
+  <symbol id="i-espresso" viewBox="0 0 24 24"><path d="M5 9h11v3.5A4.5 4.5 0 0 1 11.5 17h-2A4.5 4.5 0 0 1 5 12.5V9z"/><path d="M16 10h1.5a2.5 2.5 0 0 1 0 5H16"/><path d="M3.5 20h14"/><path d="M8.5 3.5c0 1.2 1 1.3 1 2.5M12 3.5c0 1.2 1 1.3 1 2.5"/></symbol>
+  <symbol id="i-capsule" viewBox="0 0 24 24"><path d="M4 6h16v2.5H4z"/><path d="M6.5 8.5 8 19h8l1.5-10.5"/><path d="M9 12.5h6"/></symbol>
+  <symbol id="i-moka" viewBox="0 0 24 24"><path d="M8.5 3h7l1 6h-9l1-6z"/><path d="M7.5 9h9l-1 2.5h-7L7.5 9z"/><path d="M8.5 11.5h7L17.5 21h-11l2-9.5z"/><path d="M16.5 5h2a2 2 0 0 1 2 2v1.5"/></symbol>
+  <symbol id="i-mug" viewBox="0 0 24 24"><path d="M5 6h11v9a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4V6z"/><path d="M16 8.5h1.5a3 3 0 0 1 0 6H16"/><path d="M8.5 1.5c0 1.2 1 1.3 1 2.5M12 1.5c0 1.2 1 1.3 1 2.5"/></symbol>
+  <symbol id="i-generic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 8v8M8 12h8"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-cross" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="i-today" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/><circle cx="12" cy="15" r="1.6" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-stats" viewBox="0 0 24 24"><path d="M4 20h16"/><path d="M6.5 16V10M11 16V5.5M15.5 16v-3M20 16V8"/></symbol>
+  <symbol id="i-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></symbol>
+</svg>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand-block">
+      <h1 class="brand">Caffeina</h1>
+      <p class="brand-date" id="todayLabel"></p>
+    </div>
+    <button class="btn-icon" id="btnTopAdd" type="button" aria-label="Aggiungi con orario, quantità o mg personalizzati">
+      <svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg>
+    </button>
+  </div>
+</header>
+
+<main class="page">
+
+  <!-- ============ OGGI ============ -->
+  <section class="view" id="view-oggi" data-view="oggi">
+    <section class="hero" id="hero" data-state="ok" aria-live="polite">
+      <div class="ring-wrap">
+        <svg class="ring" viewBox="0 0 160 160" aria-hidden="true">
+          <circle class="ring-track" cx="80" cy="80" r="68"/>
+          <circle class="ring-fill" id="ringFill" cx="80" cy="80" r="68"/>
+        </svg>
+        <div class="ring-center">
+          <div class="ring-value"><span id="todayTotal">0</span><span class="ring-unit">mg</span></div>
+          <div class="ring-sub">di <span id="targetLabel">400</span> mg · <span id="todayPct">0%</span></div>
+        </div>
+      </div>
+      <p class="hero-msg" id="heroMsg">Restano 400 mg al target di oggi.</p>
+      <ul class="chips" aria-label="Stime">
+        <li class="chip"><span class="chip-k">In circolo ora</span><span class="chip-v" id="activeNow">≈ 0 mg</span></li>
+        <li class="chip"><span class="chip-k" id="activeBedLabel">A letto (23:00)</span><span class="chip-v" id="activeBed">≈ 0 mg</span></li>
+        <li class="chip"><span class="chip-k">Ultima assunzione</span><span class="chip-v" id="lastIntake">—</span></li>
+      </ul>
+    </section>
+
+    <section class="block">
+      <div class="section-head">
+        <h2 class="section-title">Aggiungi adesso</h2>
+        <span class="section-meta">un tocco = una porzione</span>
+      </div>
+      <div class="quick-grid" id="quickGrid"></div>
+      <button class="btn btn-ghost btn-block" id="btnCustom" type="button">Altro orario, quantità o mg…</button>
+    </section>
+
+    <section class="block">
+      <div class="section-head">
+        <h2 class="section-title">Diario di oggi</h2>
+        <span class="section-meta" id="todayCount">0 assunzioni</span>
+      </div>
+      <ul class="entries" id="todayList"></ul>
+      <p class="empty" id="todayEmpty">Niente registrato oggi. Tocca una voce qui sopra per iniziare.</p>
+    </section>
+  </section>
+
+  <!-- ============ STATISTICHE ============ -->
+  <section class="view" id="view-statistiche" data-view="statistiche" hidden>
+    <div class="period" id="periodChips" role="group" aria-label="Periodo">
+      <button type="button" class="chip-btn" data-days="7">7 giorni</button>
+      <button type="button" class="chip-btn is-active" data-days="14">14 giorni</button>
+      <button type="button" class="chip-btn" data-days="30">30 giorni</button>
+      <button type="button" class="chip-btn" data-days="90">90 giorni</button>
+      <button type="button" class="chip-btn" data-days="0">Tutto</button>
+    </div>
+    <p class="period-note" id="periodNote"></p>
+
+    <div class="kpis" id="kpis"></div>
+
+    <section class="card">
+      <div class="card-head"><h2>Totale per giorno</h2><span class="card-meta">linea tratteggiata = target</span></div>
+      <div class="chart" id="chartDaily"></div>
+    </section>
+
+    <section class="card">
+      <div class="card-head"><h2>Media giornaliera per fascia oraria</h2><span class="card-meta">mg al giorno, su tutti i giorni del periodo</span></div>
+      <div class="hbars" id="chartSlots"></div>
+    </section>
+
+    <section class="card">
+      <div class="card-head"><h2>Profilo orario</h2><span class="card-meta">mg medi al giorno per ora di assunzione</span></div>
+      <div class="chart" id="chartHours"></div>
+    </section>
+
+    <section class="card">
+      <div class="card-head"><h2>Per tipo</h2><span class="card-meta">quota del totale nel periodo</span></div>
+      <div class="hbars" id="chartItems"></div>
+    </section>
+
+    <section class="card">
+      <div class="card-head"><h2>Per giorno della settimana</h2><span class="card-meta">media sui giorni del periodo</span></div>
+      <div class="hbars" id="chartWeekday"></div>
+    </section>
+
+    <section class="card">
+      <div class="card-head"><h2>Orari</h2><span class="card-meta">sui giorni con almeno un'assunzione</span></div>
+      <dl class="facts" id="statTimes"></dl>
+    </section>
+
+    <section class="card">
+      <div class="card-head"><h2>Dettaglio giornate</h2><span class="card-meta">tocca un giorno per vedere e modificare le voci</span></div>
+      <div class="table-wrap" id="dayTable"></div>
+    </section>
+  </section>
+
+  <!-- ============ IMPOSTAZIONI ============ -->
+  <section class="view" id="view-impostazioni" data-view="impostazioni" hidden>
+
+    <section class="card">
+      <div class="card-head"><h2>Target giornaliero</h2></div>
+      <div class="target-row">
+        <label class="field">
+          <span class="field-label">mg al giorno</span>
+          <input id="setTarget" type="number" inputmode="numeric" min="50" max="2000" step="10">
+        </label>
+        <div class="presets" id="targetPresets" aria-label="Valori rapidi">
+          <button type="button" class="chip-btn" data-target="200">200</button>
+          <button type="button" class="chip-btn" data-target="300">300</button>
+          <button type="button" class="chip-btn" data-target="400">400</button>
+        </div>
+      </div>
+      <p class="help">Riferimento EFSA (2015): fino a 400 mg al giorno e fino a 200 mg per singola dose non destano preoccupazioni negli adulti sani; 200 mg al giorno in gravidanza e allattamento.</p>
+    </section>
+
+    <section class="card">
+      <div class="card-head"><h2>Voci e contenuto di caffeina</h2><span class="card-meta">valori medi indicativi, modificabili</span></div>
+      <ul class="item-editor" id="itemEditor"></ul>
+      <button class="btn btn-ghost btn-block" id="btnAddItem" type="button">Aggiungi voce</button>
+      <button class="btn btn-link" id="btnResetItems" type="button">Ripristina le voci predefinite</button>
+      <details class="sources">
+        <summary>Da dove vengono i valori predefiniti</summary>
+        <ul>
+          <li><strong>Compressa</strong> 200 mg: dosaggio tipico degli integratori di caffeina.</li>
+          <li><strong>Espresso al bar</strong> 80 mg: valore medio indicato dall'EFSA per una tazzina; i valori reali vanno da circa 50 a 100 mg a seconda di miscela (arabica/robusta) ed estrazione.</li>
+          <li><strong>Caffè in capsula</strong> 60 mg: media per una capsula espresso da 40 ml (Nespresso Original dichiara 50–130 mg per capsula, le miscele più comuni stanno intorno a 60–75 mg).</li>
+          <li><strong>Tazzina di moka</strong> 100 mg: valore medio citato dall'EFSA; le stime pubblicate vanno da 60 a 150 mg per tazzina.</li>
+          <li><strong>Caffè americano</strong> 95 mg: tazza da 240 ml di caffè filtro secondo USDA FoodData Central (l'EFSA indica circa 90 mg per 200 ml). Se per "americano" intendi espresso allungato con acqua, usa il valore dell'espresso.</li>
+        </ul>
+      </details>
+    </section>
+
+    <section class="card">
+      <div class="card-head"><h2>Stime</h2><span class="card-meta">servono solo per i valori "in circolo"</span></div>
+      <div class="two-fields">
+        <label class="field">
+          <span class="field-label">Emivita della caffeina (ore)</span>
+          <input id="setHalfLife" type="number" inputmode="decimal" min="1" max="12" step="0.5">
+        </label>
+        <label class="field">
+          <span class="field-label">Ora in cui vai a dormire</span>
+          <input id="setBedtime" type="time">
+        </label>
+      </div>
+      <p class="help">La caffeina in circolo è una stima con decadimento esponenziale: ogni emivita la quantità si dimezza. L'emivita media negli adulti è di circa 5 ore, ma varia molto da persona a persona.</p>
+    </section>
+
+    <section class="card">
+      <div class="card-head"><h2>Dati</h2><span class="card-meta" id="dataSummary"></span></div>
+      <div class="btn-row">
+        <button class="btn btn-ghost" id="btnExportJson" type="button">Esporta backup (JSON)</button>
+        <button class="btn btn-ghost" id="btnExportCsv" type="button">Esporta CSV</button>
+        <label class="btn btn-ghost file-btn">Importa backup JSON<input id="fileImport" type="file" accept="application/json,.json"></label>
+        <button class="btn btn-danger-ghost" id="btnReset" type="button">Cancella tutti i dati</button>
+      </div>
+      <p class="help">I dati restano solo su questo dispositivo, nella memoria del browser. Il backup JSON è il formato da usare per spostarli su un altro telefono o dopo una reinstallazione.</p>
+    </section>
+
+    <section class="card" id="installCard">
+      <div class="card-head"><h2>Installazione</h2></div>
+      <p class="help" id="installText"></p>
+      <button class="btn btn-primary" id="btnInstall" type="button" hidden>Installa l'app</button>
+    </section>
+
+    <p class="version" id="versionLabel"></p>
+  </section>
+</main>
+
+<nav class="tabbar" aria-label="Sezioni">
+  <button type="button" class="tab is-active" data-tab="oggi" aria-current="page"><svg class="ico" aria-hidden="true"><use href="#i-today"/></svg><span>Oggi</span></button>
+  <button type="button" class="tab" data-tab="statistiche"><svg class="ico" aria-hidden="true"><use href="#i-stats"/></svg><span>Statistiche</span></button>
+  <button type="button" class="tab" data-tab="impostazioni"><svg class="ico" aria-hidden="true"><use href="#i-settings"/></svg><span>Impostazioni</span></button>
+</nav>
+
+<!-- Foglio aggiungi/modifica -->
+<div class="sheet" id="sheet" hidden>
+  <div class="sheet-backdrop" data-close></div>
+  <form class="sheet-panel" id="entryForm" novalidate>
+    <div class="sheet-handle" aria-hidden="true"></div>
+    <h2 class="sheet-title" id="sheetTitle">Aggiungi assunzione</h2>
+    <fieldset class="item-picker" id="sheetItems">
+      <legend class="field-label">Cosa</legend>
+    </fieldset>
+    <div class="two-fields">
+      <div class="field">
+        <span class="field-label">Quantità</span>
+        <div class="stepper">
+          <button type="button" class="step" data-step="-1" aria-label="Meno">−</button>
+          <input id="fQty" type="number" inputmode="decimal" min="0.25" max="20" step="0.25" value="1" aria-label="Quantità">
+          <button type="button" class="step" data-step="1" aria-label="Più">+</button>
+        </div>
+      </div>
+      <label class="field">
+        <span class="field-label">mg totali</span>
+        <input id="fMg" type="number" inputmode="numeric" min="0" max="2000" step="1">
+      </label>
+    </div>
+    <label class="field">
+      <span class="field-label">Quando</span>
+      <input id="fWhen" type="datetime-local">
+    </label>
+    <label class="field">
+      <span class="field-label">Nota</span>
+      <input id="fNote" type="text" maxlength="80" placeholder="facoltativa" autocomplete="off">
+    </label>
+    <p class="form-error" id="formError" hidden></p>
+    <div class="sheet-actions">
+      <button type="button" class="btn btn-danger-ghost" id="fDelete" hidden>Elimina</button>
+      <span class="spacer"></span>
+      <button type="button" class="btn btn-ghost" data-close>Annulla</button>
+      <button type="submit" class="btn btn-primary" id="fSave">Salva</button>
+    </div>
+  </form>
+</div>
+
+<!-- Conferme -->
+<div class="sheet" id="ask" hidden>
+  <div class="sheet-backdrop" data-ask=""></div>
+  <div class="sheet-panel ask-panel" role="dialog" aria-modal="true" aria-labelledby="askTitle">
+    <div class="sheet-handle" aria-hidden="true"></div>
+    <h2 class="sheet-title" id="askTitle"></h2>
+    <p class="ask-msg" id="askMsg"></p>
+    <div class="sheet-actions" id="askActions"></div>
+  </div>
+</div>
+
+<!-- Esportazione -->
+<div class="sheet" id="exportSheet" hidden>
+  <div class="sheet-backdrop" data-close-export></div>
+  <div class="sheet-panel" role="dialog" aria-modal="true" aria-labelledby="exportTitle">
+    <div class="sheet-handle" aria-hidden="true"></div>
+    <h2 class="sheet-title" id="exportTitle">Esporta</h2>
+    <p class="help" id="exportInfo"></p>
+    <textarea class="export-text" id="exportText" readonly rows="6" aria-label="Contenuto esportato"></textarea>
+    <div class="sheet-actions">
+      <button type="button" class="btn btn-ghost" data-close-export>Chiudi</button>
+      <span class="spacer"></span>
+      <button type="button" class="btn btn-ghost" id="btnCopyExport">Copia</button>
+      <button type="button" class="btn btn-primary" id="btnDownloadExport">Scarica file</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden>
+  <span class="toast-msg" id="toastMsg"></span>
+  <button type="button" class="toast-action" id="toastAction" hidden></button>
+</div>
+<!-- BODY-END -->
+<script src="app.js"></script>
+</body>
+</html>
